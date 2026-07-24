@@ -77,6 +77,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "Aminah — Information Systems Student & Developer" },
+      { property: "og:title", content: "Aminah — Information Systems Student & Developer" },
+      { name: "twitter:title", content: "Aminah — Information Systems Student & Developer" },
+      { name: "description", content: "Portfolio of Aminah, an Information Systems student focused on data analysis, business systems, and web development." },
+      { property: "og:description", content: "Portfolio of Aminah, an Information Systems student focused on data analysis, business systems, and web development." },
+      { name: "twitter:description", content: "Portfolio of Aminah, an Information Systems student focused on data analysis, business systems, and web development." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1b7e30bf-9f03-44ab-be94-c3f7df940966/id-preview-12374215--415ab16e-4b54-4989-b505-97bf2e017d95.lovable.app-1784875789041.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1b7e30bf-9f03-44ab-be94-c3f7df940966/id-preview-12374215--415ab16e-4b54-4989-b505-97bf2e017d95.lovable.app-1784875789041.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

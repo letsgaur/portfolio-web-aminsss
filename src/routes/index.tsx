@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Portfolio of Aminah — data & business analyst and web developer building thoughtful, data-driven products.",
+          "Portfolio of Aminah, an Information Systems student focused on data analysis, business systems, and web development.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
