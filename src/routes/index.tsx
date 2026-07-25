@@ -13,6 +13,7 @@ import {
   ImageIcon,
 } from "lucide-react";
 import { projects } from "@/lib/projects";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -170,7 +171,7 @@ function Nav() {
       className={
         "fixed top-0 inset-x-0 z-50 transition-all duration-300 " +
         (scrolled
-          ? "bg-white/85 backdrop-blur-md shadow-[0_4px_24px_-12px_rgba(15,23,42,0.15)]"
+          ? "bg-background/85 backdrop-blur-md shadow-[0_4px_24px_-12px_rgba(15,23,42,0.15)]"
           : "bg-transparent")
       }
     >
@@ -182,27 +183,30 @@ function Nav() {
           <span className="text-sky">&lt;</span>aminah
           <span className="text-sky">/&gt;</span>
         </a>
-        <nav className="hidden md:flex items-center gap-1 font-mono text-xs uppercase">
-          {NAV.map((n) => {
-            const isActive = active === n.id;
-            return (
-              <a
-                key={n.id}
-                href={"#" + n.id}
-                className="relative px-3 py-2 text-navy/70 hover:text-navy transition-colors"
-              >
-                {n.label}
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute left-3 right-3 -bottom-0.5 h-[2px] bg-sky rounded-full"
-                    transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                  />
-                )}
-              </a>
-            );
-          })}
-        </nav>
+        <div className="flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-1 font-mono text-xs uppercase">
+            {NAV.map((n) => {
+              const isActive = active === n.id;
+              return (
+                <a
+                  key={n.id}
+                  href={"#" + n.id}
+                  className="relative px-3 py-2 text-navy/70 hover:text-navy transition-colors"
+                >
+                  {n.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-underline"
+                      className="absolute left-3 right-3 -bottom-0.5 h-[2px] bg-sky rounded-full"
+                      transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                    />
+                  )}
+                </a>
+              );
+            })}
+          </nav>
+          <ThemeToggle className="ml-1" />
+        </div>
       </div>
     </header>
   );
@@ -285,7 +289,7 @@ function Hero() {
         >
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 rounded-lg bg-navy text-white font-medium px-6 py-3 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.4)] hover:bg-sky hover:shadow-[0_16px_40px_-12px_oklch(0.75_0.11_235/0.55)] transition-all duration-200 hover:scale-[1.04]"
+            className="inline-flex items-center gap-2 rounded-lg bg-foreground text-background font-medium px-6 py-3 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.4)] hover:bg-sky hover:text-white hover:shadow-[0_16px_40px_-12px_oklch(0.75_0.11_235/0.55)] transition-all duration-200 hover:scale-[1.04]"
           >
             View My Work
             <ArrowDown className="h-4 w-4" />
@@ -387,7 +391,7 @@ function About() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.1 }}
-                className="inline-flex items-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-[0_10px_30px_-16px_rgba(15,23,42,0.25)] border border-[color:var(--border)]"
+                className="inline-flex items-center gap-3 rounded-2xl bg-card px-5 py-4 shadow-[0_10px_30px_-16px_rgba(15,23,42,0.25)] border border-[color:var(--border)]"
               >
                 <div className="rounded-xl bg-sky-tint/60 p-2.5">
                   <Trophy className="h-5 w-5 text-navy" />
@@ -494,7 +498,7 @@ function ProjectCard({ p, i }: { p: (typeof projects)[number]; i: number }) {
 
 function Projects() {
   return (
-    <section id="projects" className="relative py-28 md:py-36 bg-white/40">
+    <section id="projects" className="relative py-28 md:py-36 bg-muted/40">
       <div className="mx-auto max-w-[1140px] px-6">
         <Reveal>
           <SectionLabel index="02" title="Featured Projects" />
@@ -589,7 +593,7 @@ const CONTACTS = [
 
 function Contact() {
   return (
-    <section id="contact" className="relative py-28 md:py-36 bg-white/40">
+    <section id="contact" className="relative py-28 md:py-36 bg-muted/40">
       <div className="mx-auto max-w-[1140px] px-6">
         <Reveal>
           <div className="mb-10">
@@ -627,6 +631,7 @@ function Contact() {
               >
                 <div className="rounded-xl p-2.5 bg-sky-tint/50 group-hover:bg-sky transition-colors duration-200">
                   <Icon className="h-5 w-5 text-navy group-hover:text-white transition-colors duration-200" />
+
                 </div>
                 <div className="min-w-0">
                   <div className="font-mono text-[11px] text-slate-muted uppercase tracking-wider">
