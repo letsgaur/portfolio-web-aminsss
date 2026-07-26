@@ -452,48 +452,65 @@ function About() {
 
 function ProjectCard({ p, i }: { p: (typeof projects)[number]; i: number }) {
   return (
-    <motion.article
+    <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -8 }}
-      className="group rounded-2xl bg-card border border-[color:var(--border)] overflow-hidden shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] hover:shadow-[0_24px_50px_-20px_rgba(15,23,42,0.35)] transition-shadow duration-300"
     >
-      <div className="aspect-[16/9] bg-[color:var(--muted)] relative overflow-hidden">
-        <div className="absolute inset-3 rounded-xl border-2 border-dashed border-[color:var(--border)] flex flex-col items-center justify-center text-slate-muted transition-transform duration-500 group-hover:scale-[1.05]">
-          <ImageIcon className="h-8 w-8 mb-2 opacity-60 group-hover:animate-pulse" />
-          <span className="font-mono text-[11px] uppercase tracking-wider">
-            add image here
-          </span>
+      <Link
+        to="/projects/$slug"
+        params={{ slug: p.slug }}
+        className="group block rounded-2xl bg-card border border-[color:var(--border)] overflow-hidden shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] hover:shadow-[0_24px_50px_-20px_rgba(15,23,42,0.35)] hover:border-sky/50 transition-all duration-300"
+      >
+        <div className="aspect-[16/9] bg-[color:var(--muted)] relative overflow-hidden">
+          {p.image ? (
+            <img
+              src={p.image}
+              alt={p.title}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+            />
+          ) : (
+            <div className="absolute inset-3 rounded-xl border-2 border-dashed border-[color:var(--border)] flex flex-col items-center justify-center text-slate-muted transition-transform duration-500 group-hover:scale-[1.05]">
+              <ImageIcon className="h-8 w-8 mb-2 opacity-60 group-hover:animate-pulse" />
+              <span className="font-mono text-[11px] uppercase tracking-wider">
+                add image here
+              </span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute top-3 right-3 h-8 w-8 rounded-full bg-background/90 backdrop-blur-sm border border-[color:var(--border)] flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+            <ArrowUpRight className="h-4 w-4 text-navy" />
+          </div>
         </div>
-      </div>
-      <div className="p-6">
-        <div className="font-mono text-[12px] text-sky mb-2">// {p.fileLabel}</div>
-        <h3 className="text-xl font-bold text-navy tracking-tight">{p.title}</h3>
-        <p className="mt-3 text-slate-muted leading-[1.65]">{p.description}</p>
-        <div className="mt-4 font-mono text-[12px] text-navy/70">
-          <span className="text-slate-muted">role: </span>
-          <span style={{ color: "var(--code-green)" }}>{'"' + p.role + '"'}</span>
+        <div className="p-6">
+          <div className="font-mono text-[12px] text-sky mb-2">// {p.fileLabel}</div>
+          <h3 className="text-xl font-bold text-navy tracking-tight group-hover:text-sky transition-colors duration-200">
+            {p.title}
+          </h3>
+          <p className="mt-3 text-slate-muted leading-[1.65]">{p.description}</p>
+          <div className="mt-4 font-mono text-[12px] text-navy/70">
+            <span className="text-slate-muted">role: </span>
+            <span style={{ color: "var(--code-green)" }}>{'"' + p.role + '"'}</span>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {p.techStack.map((t) => (
+              <span
+                key={t}
+                className="font-mono text-[11px] px-2 py-0.5 rounded-md bg-sky-tint/40 text-navy border border-sky-tint/70"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+          <div className="mt-5 pt-4 border-t border-[color:var(--border)] flex items-center justify-between font-mono text-[12px] text-sky group-hover:text-navy transition-colors">
+            <span>View Case Study</span>
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </div>
         </div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.15 + i * 0.08, duration: 0.4 }}
-          className="mt-4 flex flex-wrap gap-1.5"
-        >
-          {p.techStack.map((t) => (
-            <span
-              key={t}
-              className="font-mono text-[11px] px-2 py-0.5 rounded-md bg-sky-tint/40 text-navy border border-sky-tint/70"
-            >
-              {t}
-            </span>
-          ))}
-        </motion.div>
-      </div>
-    </motion.article>
+      </Link>
+    </motion.div>
   );
 }
 
